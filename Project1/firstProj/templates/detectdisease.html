@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Ensure the background covers the entire page */
+        }
+
+        #background-container {
+            transition: background-image 4.5s ease-in-out;
+        }
+
+        .bgimg {
+            transition: background-image 4.5s ease-in-out;
+        }
+        /* .smooth-transition {
+            background-image: 'url(' + e.target.result + ')';
+        } */
+        
+        #background-container img {
+            transition: background-image 4.5s ease-in-out;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: center;
+            object-fit: cover;
+            filter: blur(5px); 
+            z-index: -1;
+            margin-top: 0px;
+            transform: scale(105%);
+        }
+        
+        header {
+            text-align: center;
+            background-color: rgba(0, 0, 0, .95);
+            color: #fff;
+            position: relative;
+            padding: 10px;
+            z-index: 1; /* Bring header above the background */
+        }
+        
+        nav {
+            background-color: rgba(248, 248, 248, 0.5); /* Off-white background color */
+            padding: 10px 15px; /* Adjust padding as needed */
+            position: sticky;
+            top: 0;
+            z-index: 100; /* Ensure the navigation bar is above other elements */
+            display: flex; /* Use flexbox */
+            justify-content: space-between; /* Evenly space the items */
+            align-items: center;
+        }
+
+        a {
+            border: 2px solid black;
+        }
+        
+        nav a,
+        .service-card button,
+        #additional-options button {
+            text-decoration: none;
+            color: #fff;
+            padding: 0px;
+            /* padding: 10px 15px; */
+            /* margin: 0 5px; */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        nav a {
+            background-color: #1e87f0;
+            padding: 10px 20px;
+            margin: 0 5px;
+        }
+        
+        nav a:hover,
+        .service-card button:hover,
+        #additional-options button:hover {
+            background-color: #2980b9;
+        }
+        
+        .service-card button,
+        #additional-options button {
+            background-color: #2ecc71;
+            /* background-color: rgba(0,0,0,0.1); */
+        }
+        
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            text-align: center;
+            max-width: 300px; /* Set a maximum width for the card */
+        }
+        
+        #drop-area {
+            border: 2px dashed rgb(160, 160, 160);
+            padding: 20px;
+            cursor: pointer;
+            height: 150px; /* Set a fixed height for the drop area */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 10px;
+
+            position: relative;
+        }
+        
+        #drop-area label {
+            /* display: block; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+            position: absolute;
+            top: 0;
+            left: 10px;
+            right: 10px;
+            bottom: 0;
+            margin: 0;
+
+            cursor: pointer;
+            /* border: 2px solid black; */
+        }
+        
+        #detect-disease-card button {
+            margin-top: 20px;
+        }
+        
+        #result {
+            margin-top: 20px;
+        }
+        
+        #additional-options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #additional-options a{
+            display: block;
+            /* width: 100%;
+            height: 100%; */
+            text-decoration: none;
+            color: inherit;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            /* margin: 0 5px; */
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div id="background-container">
+        <img class="bgimg" id='bgimgid' src="{{ url_for('static', filename='images/handsign.jpeg')}}">
+    </div>
+    
+    <header>
+        <h1>Detect your Disease</h1>
+    </header>
+    
+    <nav>
+        <a href="{{ url_for('index')}}">Home</a>
+        <!-- Show Log In/Log Out based on user authentication -->
+        <!-- <p id="logout-btn">
+            Hello {{ email }} <a href="#">Log Out</a>
+        </p> -->
+        <p id="login-btn">
+            {% if isLoggedIn %}
+            Hello {{ email }}
+            {% else %}
+            <a href="{{ url_for('login')}}">Log In</a>
+            {% endif %}
+            <!-- <a href="{{ url_for('login')}}">Log In</a> -->
+        </p>
+    </nav>
+    
+    <section>
+        <div class="service-card" id="detect-disease-card">
+            <h2>Detect My Disease</h2>
+            
+            <div id="drop-area" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <input type="file" id="fileElem" style="display:none;" multiple accept="image/*" onchange="handleFiles(this.files)">
+                <label for="fileElem" id="fileLabel">Drag & Drop or Click to select an image to Detect it's Disease</label>
+                <span color="red">{{ message }}</span>
+            </div>
+            
+            <!-- <button onclick="detectDisease()">Detect Disease</button> -->
+            
+            <div id="result">
+                {% if not isModelLoaded %}
+                The Models are currently loading, detecting disease might take some time.
+                {% endif %}
+            </div>
+            
+            <!-- Additional options displayed after detecting the disease -->
+            <div id="additional-options">
+                <!-- <button onclick="uploadAnotherImage()">Upload Another Image</button> -->
+                <button onclick="openFindDoctorsPage()"><a href="{{ url_for('findDoctor') }}">Find Doctors</a></button>
+                <button onclick="openAboutDiseasePage()"><a href="">About Disease</a></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Add more sections for additional tabs -->
+    
+    <script>
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        
+        function drop(event) {
+            event.preventDefault();
+            var files = event.dataTransfer.files;
+            window.globalFiles = files;
+            handleFiles(files);
+        }
+        
+        function handleFiles(files) {
+            var dropArea = document.getElementById('drop-area');
+            var resultArea = document.getElementById('result');       
+            var bgimg = document.getElementById('bgimgid');     
+            // var detectDiseaseCard = document.getElementById('detect-disease-card');
+            var additionalOptions = document.getElementById('additional-options');
+
+            dropArea.style.border = '2px solid #000';
+            
+            if (files.length > 0) {
+                var file = files[0];
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    dropArea.style.backgroundImage = 'url(' + e.target.result + ')';
+                    dropArea.style.backgroundSize = 'cover';
+                    bgimg.src = e.target.result;
+                    bgimg.style.filter = 'blur(5px)';
+                    document.getElementById('detect-disease-card').style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+                    // dropArea.style.backgroundSize = 'cover';
+                };
+                
+                reader.readAsDataURL(file);
+                fileLabel.style.display = 'none';
+
+                var isLoggedIn = "{{ isLoggedIn }}" === "True";
+                if(!isLoggedIn) {
+                    document.getElementById('result').innerHTML = '<span style="color: red">Please LogIn to continue</span>';
+                    console.log("returning... not logged in.")
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append('image', file);
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '/uploader', true);
+                xhr.onload = function() {
+                    console.log("In the function");
+                    if (xhr.status === 200) {
+                        console.log("Finding Result...");
+                        let result = JSON.parse(xhr.responseText);
+                        console.log(result);
+                        displayClassificationResult(result);
+                    }
+                };
+                xhr.send(formData);
+
+                additionalOptions.style.display = 'block';
+
+            } else {
+                resultArea.innerHTML = 'No file selected!';
+                fileLabel.style.display = 'block';
+            }
+        }
+
+        function displayClassificationResult(result) {
+            console.log("Classification Successfull");
+            var resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <h2>Classification Result:</h2>
+                <p>Predicted class: ${result.class}</p>
+            `;
+        }
+        
+        function openFindDoctorsPage() {
+            alert('Redirect to Find Doctors Page');
+        }
+        
+        function openAboutDiseasePage() {
+            alert('Redirect to About Disease Page');
+        }
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+    <title>Health Insight-AI</title>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><img src="{{ url_for('static', filename='images/logo.jpg')}}" alt="Health Insight-AI Logo" class="logo"></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#ai">AI in Health</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        {% if isLoggedIn %}
+                        <a href="{{ url_for('logout')}}">Log Out</a>
+                        {% else %}
+                        <a href="{{ url_for('login')}}">Log In</a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if isLoggedIn %}
+                        <a>Hi {{ email }}</a>
+                        {% else %}
+                        <a href="{{ url_for('registration')}}">Register</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container" id="Empower">
+            <h1>Empowering Healthcare with AI</h1>
+            <p>Your trusted partner for innovative AI solutions in the health industry.</p>
+            <a href="#services" class="cta-button">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div id="about-us" class="collapsed">
+                <h2>About Us</h2>
+                <h1>Welcome to Our Innovative World</h1>
+                <p>At the forefront of medical technology, our dynamic team of four individuals - Sounak Mukherjee, Shankha
+                    Chakraborty, Soumya Shruti, and Ayan Naskar - is driving a groundbreaking project focused on medical image
+                    diagnosis through the power of artificial intelligence.</p>
+        
+                <p>Our mission is to advance the field of medical diagnostics and address the pressing issue of healthcare
+                    accessibility in remote areas, particularly in villages. By harnessing the capabilities of AI, we aim to make
+                    high-quality healthcare more affordable and accessible to those in underserved communities. This project
+                    represents a significant leap forward in bridging the gap between technological advancements and the
+                    healthcare needs of the marginalized.</p>
+        
+                <h1>Continuous Improvement and Revolutionizing Healthcare</h1>
+                <p>At the heart of our endeavor is the commitment to continuous improvement. We understand the evolving nature of
+                    technology and its impact on healthcare, and we are dedicated to refining our solution to ensure it stays at
+                    the forefront of innovation. Through relentless research, development, and collaboration, we aspire to
+                    revolutionize medical image diagnosis, setting new standards for accuracy and efficiency.</p>
+        
+                <h1>Our Vision for the Future</h1>
+                <p>As a team, we are driven by a shared passion for making a meaningful impact on global healthcare. Our diverse
+                    skills and expertise converge to create a synergy that propels our project forward. Together, we envision a
+                    future where our technology not only transforms the way diseases are diagnosed but also becomes a beacon of
+                    hope for those in remote areas who deserve access to quality healthcare.</p>
+        
+                <p>Join us on this journey as we push the boundaries of what's possible in medical imaging with AI. Together, we
+                    are shaping a future where healthcare knows no boundaries, and everyone, regardless of location, can
+                    benefit from the advancements in medical technology.</p>
+                
+            </div>
+            <button id="expand-button" class="cta-button">Expand</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div id="servicediv" class="services-container">
+                <div class="text-section">
+                    <h2><a href="{{ url_for('services') }}">Our Services</a></h2>
+                    <div class="service">
+                        Our current Services include:
+                        <ul>
+                            <li>Disease Detection from image</li>
+                            <li>Contact Doctors</li>
+                            <li>Find insights on your disease</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="button-section">
+                    <a class="cta-button" href="{{ url_for('services') }}">Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- AI in Health Section -->
+    <section id="ai" class="ai">
+        <div class="container">
+            <div id="ai-in-healthcare" class="collapsed">
+                <h2>AI in Health</h2>        
+                <p>Artificial Intelligence (AI) is revolutionizing the health sector by offering innovative solutions to enhance various aspects of healthcare delivery. Here are some ways in which AI is utilized in the health sector:</p>
+        
+                <ol>
+                    <li>
+                        <h3>Medical Imaging and Diagnostics:</h3>
+                        <ul>
+                            <li><strong>Image Analysis:</strong> AI algorithms analyze medical images, such as X-rays, MRIs, and CT scans, to detect abnormalities, tumors, or other medical conditions with high accuracy.</li>
+                            <li><strong>Radiology Assistance:</strong> AI assists radiologists by highlighting potential issues, reducing workload, and improving diagnostic accuracy.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Predictive Analytics and Risk Assessment:</h3>
+                        <ul>
+                            <li><strong>Disease Prediction:</strong> AI analyzes patient data to identify patterns and predict the likelihood of developing certain diseases. This allows for proactive interventions and personalized treatment plans.</li>
+                            <li><strong>Risk Stratification:</strong> AI helps in assessing the risk of various health conditions for individuals based on their health history and lifestyle factors.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Drug Discovery and Development:</h3>
+                        <ul>
+                            <li><strong>Target Identification:</strong> AI accelerates drug discovery by identifying potential drug targets and predicting their effects on specific diseases.</li>
+                            <li><strong>Drug Repurposing:</strong> AI analyzes existing drugs for new therapeutic purposes, potentially saving time and resources in drug development.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Personalized Medicine:</h3>
+                        <ul>
+                            <li><strong>Treatment Customization:</strong> AI analyzes genetic and molecular data to tailor treatment plans based on an individual's unique genetic makeup, optimizing treatment effectiveness.</li>
+                            <li><strong>Drug Response Prediction:</strong> AI helps predict how patients will respond to specific medications, minimizing adverse reactions and improving outcomes.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Virtual Health Assistants and Chatbots:</h3>
+                        <ul>
+                            <li><strong>Patient Engagement:</strong> AI-driven virtual assistants provide patients with information, reminders for medication, and support for chronic disease management.</li>
+                            <li><strong>Appointment Scheduling:</strong> Chatbots streamline administrative processes, helping patients schedule appointments and receive timely information.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Administrative Efficiency:</h3>
+                        <ul>
+                            <li><strong>Billing and Coding Automation:</strong> AI automates billing processes and ensures accurate medical coding, reducing administrative errors.</li>
+                            <li><strong>Fraud Detection:</strong> AI algorithms identify patterns of fraudulent activities in healthcare claims and billing.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Remote Monitoring and Telehealth:</h3>
+                        <ul>
+                            <li><strong>Remote Patient Monitoring:</strong> AI enables continuous monitoring of patients with chronic conditions, allowing healthcare providers to intervene early if issues arise.</li>
+                            <li><strong>Telemedicine:</strong> AI supports virtual consultations, enabling healthcare professionals to diagnose and treat patients remotely.</li>
+                        </ul>
+                    </li>
+        
+                    <li>
+                        <h3>Clinical Decision Support Systems:</h3>
+                        <ul>
+                            <li><strong>Evidence-Based Decision Making:</strong> AI systems analyze vast amounts of medical literature and data to provide healthcare professionals with up-to-date information and evidence-based recommendations.</li>
+                            <li><strong>Alerts and Reminders:</strong> AI helps clinicians by providing alerts for potential drug interactions, allergies, and other critical information during patient care.</li>
+                        </ul>
+                    </li>
+                </ol>
+        
+                <p>AI in healthcare holds tremendous potential for improving patient outcomes, reducing costs, and enhancing overall efficiency in the delivery of healthcare services. However, ethical considerations, data privacy, and regulatory challenges must be carefully addressed to ensure responsible and beneficial AI implementations in the health sector.</p>
+            </div>
+            <button id="expand-button-about" class="cta-button">Expand</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contactform" action="/submit" method="post">
+                <div>
+                    <label for="question">Your Question:</label><br>
+                    <input type="text" id="question" name="question" required><br>
+            
+                    <label for="description">Description (Optional):</label><br>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                    <p style="color: red;">{{ err_message }}</p>
+                </div>
+                <button type="submit" class="cta-button">Submit</button>
+            </form>
+            <!-- Add contact information and social media links -->
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Health Insight-AI. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script>
+        fetch('/load_models')
+        .then(response => response.json())
+        .then(data => {
+            // Handle the success response if needed
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle the error if needed
+            console.error(error);
+        });
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var aboutUs = document.getElementById("about-us");
+            var expandButton = document.getElementById("expand-button");
+
+            expandButton.addEventListener("click", function () {
+                var content =aboutUs;
+                content.classList.toggle("expanded");
+
+                var buttonText = content.classList.contains("expanded") ? "Collapse" : "Expand";
+                expandButton.textContent = buttonText;
+            });
+
+            var aih = document.getElementById("ai-in-healthcare");
+            var expandButton2 = document.getElementById("expand-button-about");
+
+            expandButton2.addEventListener("click", function () {
+                var content =aih;
+                content.classList.toggle("expanded");
+
+                var buttonText = content.classList.contains("expanded") ? "Collapse" : "Expand";
+                expandButton2.textContent = buttonText;
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Reset some default styles */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic styling for the page */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header styles */
+header {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    top: 0;
+    margin: 0px 0px;
+    position: fixed;
+    width: 100%; /* Set the width to 100% */
+    left: 0;     /* Ensure the header starts from the left edge */
+    right: 0;    /* Ensure the header ends at the right edge */
+}
+
+.logo {
+    max-width: 70px;
+    border-radius: 50%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+/* Hero Section styles */
+.hero {
+    position: relative;
+    color: #fff;
+    text-align: center;
+    padding: 200px 0;
+    height: 100px;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('../images/hero-background.jpg');
+    background-size: cover;
+    scale: 105%;
+    filter: blur(5px); /* Adjust the blur value as needed */
+    z-index: -1; /* Place the background behind other content */
+}
+
+.hero h1 {
+    /* margin-top: 400px; */
+    font-size: 2.5em;
+    /* top: 100px; */
+    /* margin-top: 20px; */
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+}
+
+.Empower {
+    margin-top: 200px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #1e87f0;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+/* About Us Section styles */
+.about, 
+.ai {
+    padding-top: 110px;
+    padding-bottom: 50px;
+    /* background-color: #fff; */
+}
+
+#about-us.collapsed, 
+#ai-in-healthcare.collapsed{
+    max-height: 340px; /* Set your desired initial height */
+    overflow: hidden;
+    transition: max-height 0.3s ease; /* Add a smooth transition effect */
+}
+
+#about-us.expanded, #ai-in-healthcare.expanded {
+    max-height: none;
+}
+
+.about h2 {
+    font-size: 2.3em;
+    margin-bottom: 40px;
+}
+
+.about p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.about .container,
+.ai .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 40px;
+}
+
+#about-us, 
+#ai-in-healthcare {
+    flex: 0 0 70%;
+    /* margin-right: 20px; */
+}
+#expand-button, 
+#expand-button-about {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: fit-content;
+    margin-top: auto;
+    bottom: 0px;
+
+    /* align-self: flex-end; */
+}
+
+/* Services Section styles */
+.services {
+    padding: 110px 0;
+}
+
+.services h1 a {
+    border: 2px solid black;
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #3498db; /* Choose your desired background color */
+    color: #fff; /* Choose your desired text color */
+    text-decoration: none;
+    border-radius: 5px; /* Adjust border radius as needed */
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+    font-size: 10;
+}
+
+.services h1 a:hover {
+    background-color: #1e87f0; /* Change the background color on hover */
+}
+
+
+.services h2 a{
+    text-decoration: none;
+    font-style: normal;
+    color: #000;
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+
+
+servicediv{
+    display: flex;
+    justify-content: center; /* Adjust as needed: space-between, space-around, etc. */
+    align-items: center; /* Adjust as needed: flex-start, flex-end, center, etc. */
+}
+
+.services-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-section {
+    flex: 1;
+}
+
+.button-section {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center;
+    flex: 0;
+    /* Adjust flex property as needed to control the width of the button section */
+}
+
+.service li {
+    margin: 8px; /* Adjust the value to control the spacing */
+    margin-left: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.service li:hover{
+    margin-left: 30px;
+    
+}
+
+
+/* AI in Health Section styles */
+.ai {
+    padding-top: 80px;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    padding: 0 20px;
+    /* padding: 80px 0; */
+}
+
+.ai h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.ai p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+
+/* Contact Section styles */
+.contact {
+    padding: 80px 0;
+}
+
+.contact h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+#contactform {
+    display: flex;
+    justify-content: space-between;
+}
+
+#contactform div {
+    flex: 0 0 70%;
+}
+#contactform .cta-button {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    bottom: 0px;
+    flex: 0;
+}
+
+#question, #description {
+    border: none;
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 5px;
+    width: 500px;
+    /* right: 100px; */
+    padding: 5px;
+}
+#question {
+    height: 25px;
+}
+#description {
+    height: 100px;
+}
+
+/* Footer Section styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#contact, #ai, #services, #about {
+    position: relative;
+    overflow: hidden;
+}
+
+#about::before,
+#services::before,
+#ai::before,
+#contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/creative.jpg'); /* Replace with your blurred image */
+    filter: brightness(1.2) blur(6px); 
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease; /* Smooth transition effect */
+    z-index: -1; /* Place the blurred background behind the content */
+}
+
+#about:hover::before,
+#services:hover::before,
+#ai:hover::before,
+#contact:hover::before {
+    opacity: 1; /* Fully reveal the blurred background on hover */
+}
+
+/* Add other styles for your section */
+.container {
+    position: relative;
+    z-index: 1; /* Ensure the content is above the blurred background */
+    /* Add other styles for your content */
+}
+
+#ai-in-healthcare ul {
+    margin-left: 10px;
+    /* border: 2px solid black; */
+}
+
+.ai {
+    padding-top: 110px;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    /* Add responsive styles here */
+}
